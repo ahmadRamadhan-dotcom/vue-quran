@@ -47,6 +47,14 @@
         </p>
       </div>
     </div>
+    <div class="w-full mt-8 sticky top-0 z-[30]">
+      <audio controls class="w-full">
+        <source
+          src="https://equran-id-audio.nos.wjv-1.neo.id/content/audio/002.mp3"
+          type="audio/mpeg"
+        />
+      </audio>
+    </div>
   </div>
 </template>
 
