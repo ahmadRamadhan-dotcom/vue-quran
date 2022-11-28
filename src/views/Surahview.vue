@@ -1,28 +1,38 @@
 <template>
-  <div class="mt-4 w-11/12 sm:w-[94%] md:w-[700px] xl:w-[760px] mx-auto">
+  <router-link to="/" class="fixed top-24">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M20.3284 11.0001V13.0001L7.50011 13.0001L10.7426 16.2426L9.32842 17.6568L3.67157 12L9.32842 6.34314L10.7426 7.75735L7.49988 11.0001L20.3284 11.0001Z"
+        fill="currentColor"
+      />
+    </svg>
+  </router-link>
+  <div
+    v-if="detailSurah"
+    class="mt-4 w-11/12 sm:w-[94%] md:w-[700px] xl:w-[760px] mx-auto"
+  >
     <div
-      :class="showMore ? 'min-h-[6.5em] transition duration-300' : 'h-[7.7em]'"
+      :class="showMore ? 'min-h-[6.5em] transition duration-300' : 'h-[9em]'"
       class="w-full relative border border-[#464b50] rounded-sm shadow-sm"
     >
       <div class="flex items-center gap-2 pl-5 pt-5">
-        <p class="font-normal text-xl">2.</p>
-        <p id="surah_name" class="font-normal text-xl">Al-Baqarah</p>
-        <p id="ayat" class="-translate-y-1">الفاتحة</p>
+        <p class="font-normal text-xl">{{ detailSurah.nomor }}</p>
+        <p id="surah_name" class="font-normal text-xl">
+          {{ detailSurah.nama_latin }}
+        </p>
+        <p id="ayat" class="-translate-y-1">{{ detailSurah.nama }}</p>
       </div>
-      <p :class="showMore ? '' : 'truncate ...'" class="md:text-justify p-5">
-        Surat Al Baqarah yang 286 ayat itu turun di Madinah yang sebahagian
-        besar diturunkan pada permulaan tahun Hijrah, kecuali ayat 281
-        diturunkan di Mina pada Hajji wadaa' (hajji Nabi Muhammad s.a.w. yang
-        terakhir). Seluruh ayat dari surat Al Baqarah termasuk golongan
-        Madaniyyah, merupakan surat yang terpanjang di antara surat-surat Al
-        Quran yang di dalamnya terdapat pula ayat yang terpancang (ayat 282).
-        Surat ini dinamai Al Baqarah karena di dalamnya disebutkan kisah
-        penyembelihan sapi betina yang diperintahkan Allah kepada Bani Israil
-        (ayat 67 sampai dengan 74), dimana dijelaskan watak orang Yahudi pada
-        umumnya. Dinamai Fusthaatul-Quran (puncak Al Quran) karena memuat
-        beberapa hukum yang tidak disebutkan dalam surat yang lain. Dinamai juga
-        surat alif-laam-miim karena surat ini dimulai dengan Alif-laam-miim.
-      </p>
+      <p
+        v-html="detailSurah.deskripsi"
+        :class="showMore ? '' : 'truncate ...'"
+        class="md:text-justify p-5"
+      ></p>
       <div
         @click="showMore = !showMore"
         class="absolute bottom-0 cursor-pointer w-full grid place-content-center"
@@ -47,26 +57,24 @@
         </p>
       </div>
     </div>
-    <div class="w-full mt-8 sticky top-0 z-[30]">
+    <div class="w-full sticky top-0 z-[30] mt-4">
       <audio controls class="w-full">
-        <source
-          src="https://equran-id-audio.nos.wjv-1.neo.id/content/audio/002.mp3"
-          type="audio/mpeg"
-        />
+        <source :src="detailSurah.audio" type="audio/mpeg" />
       </audio>
     </div>
-    {{ detailSurah.ayat }}
+
     <div
-      class="mt-10 w-full flex justify-between border border-[#464b50] min-h-[5.5em] rounded-sm p-5"
+      v-for="(data, index) in detailSurah.ayat"
+      :key="index"
+      :class="index == 0 ? 'mt-10' : ''"
+      class="w-full mb-4 border border-[#464b50] min-h-[5.5em] rounded-sm p-5"
     >
-      <div>
-        <p class="italic">al-ḥamdu lillāhi rabbil-‘ālamīn(a).</p>
-        <p>Segala puji bagi Allah, Tuhan seluruh alam,</p>
+      <div class="grid place-content-end">
+        <p id="ayat" class="font-['Amiri_Quran'] text-base">{{ data.ar }}</p>
       </div>
-      <div>
-        <span id="ayat" class="font-['Amiri_Quran']"
-          >اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَۙ
-        </span>
+      <div class="mt-5">
+        <p class="italic">{{ data.tr }}</p>
+        <p>{{ data.idn }}</p>
       </div>
     </div>
   </div>
@@ -81,7 +89,7 @@ const route = useRoute();
 const no = route.params.no;
 const showMore = ref(false);
 
-const detailSurah = ref([]);
+const detailSurah = ref(null);
 
 onMounted(() => {
   axios
