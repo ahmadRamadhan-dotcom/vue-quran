@@ -7,6 +7,11 @@ const routes = [
     name: "Home",
     component: Homeview,
   },
+  {
+    path: "/surah/:no",
+    name: "Surah",
+    component: () => import("~/views/Surahview.vue"),
+  },
 ];
 
 const router = createRouter({

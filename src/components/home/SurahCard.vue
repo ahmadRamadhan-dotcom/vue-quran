@@ -1,7 +1,13 @@
 <template>
-  <article
+  <router-link
     v-for="(data, index) in surahData"
     :key="index"
+    :to="{
+      name: 'Surah',
+      params: {
+        no: data.nomor,
+      },
+    }"
     class="border border-[#464b50] hover:border-[#2ca4ab] group flex justify-between items-center transition duration-200 rounded-[.25rem] h-[4.4em] p-5"
   >
     <div class="flex gap-5" id="surah_preview_left">
@@ -26,7 +32,7 @@
         {{ data.jumlah_ayat }} Ayat
       </p>
     </div>
-  </article>
+  </router-link>
 </template>
 
 <script setup>
