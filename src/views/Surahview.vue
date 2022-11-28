@@ -26,7 +26,7 @@
       class="w-full relative border border-[#464b50] rounded-sm shadow-sm"
     >
       <div class="flex items-center gap-2 pl-5 pt-5">
-        <p class="font-normal text-xl">{{ detailSurah.nomor }}</p>
+        <p class="font-normal text-xl">{{ detailSurah.nomor }}.</p>
         <p id="surah_name" class="font-normal text-xl">
           {{ detailSurah.nama_latin }}
         </p>
