@@ -1,7 +1,15 @@
-# Vue 3 + Vite
+# Web Al-quran
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Digital Al-quran with public api quran indonesia
 
-## Recommended IDE Setup
+[Equran](https://equran.id/apidev)
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+## Built with
+
+- [VueJS](https://vuejs.org/)
+- [Vue Router](https://router.vuejs.org/)
+- [Tailwindcss](https://tailwindcss.com/)
+
+## Demo
+
+[Digital Quran](https://vue-quran-xi.vercel.app/)
