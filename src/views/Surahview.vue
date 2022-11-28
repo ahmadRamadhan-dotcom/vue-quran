@@ -18,7 +18,11 @@
     class="mt-4 w-11/12 sm:w-[94%] md:w-[700px] xl:w-[760px] mx-auto"
   >
     <div
-      :class="showMore ? 'min-h-[6.5em] transition duration-300' : 'h-[9em]'"
+      :class="
+        showMore
+          ? 'min-h-[6.5em] transition duration-300'
+          : 'min-h-[9em] overflow-hidden'
+      "
       class="w-full relative border border-[#464b50] rounded-sm shadow-sm"
     >
       <div class="flex items-center gap-2 pl-5 pt-5">
