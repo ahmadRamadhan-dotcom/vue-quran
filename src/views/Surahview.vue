@@ -7,7 +7,7 @@
       <div class="flex items-center gap-2 pl-5 pt-5">
         <p class="font-normal text-xl">2.</p>
         <p id="surah_name" class="font-normal text-xl">Al-Baqarah</p>
-        <p>الفاتحة</p>
+        <p id="ayat" class="-translate-y-1">الفاتحة</p>
       </div>
       <p :class="showMore ? '' : 'truncate ...'" class="md:text-justify p-5">
         Surat Al Baqarah yang 286 ayat itu turun di Madinah yang sebahagian
@@ -54,6 +54,20 @@
           type="audio/mpeg"
         />
       </audio>
+    </div>
+    {{ detailSurah.ayat }}
+    <div
+      class="mt-10 w-full flex justify-between border border-[#464b50] min-h-[5.5em] rounded-sm p-5"
+    >
+      <div>
+        <p class="italic">al-ḥamdu lillāhi rabbil-‘ālamīn(a).</p>
+        <p>Segala puji bagi Allah, Tuhan seluruh alam,</p>
+      </div>
+      <div>
+        <span id="ayat" class="font-['Amiri_Quran']"
+          >اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَۙ
+        </span>
+      </div>
     </div>
   </div>
 </template>

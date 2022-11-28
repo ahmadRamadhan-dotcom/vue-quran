@@ -27,7 +27,7 @@
       </div>
     </div>
     <div id="surah_preview_right">
-      <p class="text-[13px]">{{ data.nama }}</p>
+      <p id="ayat" class="text-[13px] text-right">{{ data.nama }}</p>
       <p class="text-[#777] font-bold text-[12px] group-hover:text-[#2ca4ab]">
         {{ data.jumlah_ayat }} Ayat
       </p>
