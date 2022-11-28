@@ -14,6 +14,21 @@
     </svg>
   </router-link>
   <div
+    v-show="error"
+    class="h-screen grid place-content-center place-items-center"
+  >
+    <p class="text-red-500 text-center text-2xl">Oopss! {{ error }}</p>
+    <p>
+      Please report to github
+      <a
+        href="https://github.com/ahmadRamadhan-dotcom/vue-quran/issues"
+        target="_blank"
+        class="underline text-blue-300"
+        >vue-quran</a
+      >
+    </p>
+  </div>
+  <div
     v-if="detailSurah"
     class="mt-4 w-11/12 sm:w-[94%] md:w-[700px] xl:w-[760px] mx-auto"
   >
@@ -92,12 +107,20 @@ import axios from "axios";
 const route = useRoute();
 const no = route.params.no;
 const showMore = ref(false);
+const error = ref(null);
 
 const detailSurah = ref(null);
 
+const fetchSingleSurah = async (no) => {
+  try {
+    const response = await axios.get(`https://equran.id/api/surat/${no}`);
+    detailSurah.value = response.data;
+  } catch (err) {
+    error.value = err;
+  }
+};
+
 onMounted(() => {
-  axios
-    .get(`https://equran.id/api/surat/${no}`)
-    .then((res) => (detailSurah.value = res.data));
+  fetchSingleSurah(no);
 });
 </script>

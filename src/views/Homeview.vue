@@ -4,6 +4,13 @@
   >
     <SurahCard :surah-data="surahData" />
   </main>
+  <div
+    v-show="error"
+    id="error"
+    class="grid place-content-center place-items-center h-screen"
+  >
+    <p class="text-red-500 text-center font-bold text-2xl">Opps! {{ error }}</p>
+  </div>
 </template>
 
 <script setup>
@@ -14,12 +21,16 @@ import SurahCard from "~/components/home/SurahCard.vue";
 const surahData = ref([]);
 const error = ref(null);
 
+const fetchSurah = async () => {
+  try {
+    const response = await axios.get("https://equran.id/api/surat");
+    surahData.value = response.data;
+  } catch (err) {
+    error.value = err;
+  }
+};
+
 onMounted(() => {
-  axios
-    .get("https://equran.id/api/surat")
-    .then((res) => (surahData.value = res.data))
-    .catch((err) => {
-      error.value = err;
-    });
+  fetchSurah();
 });
 </script>
